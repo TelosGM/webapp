@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="module" src="index.js"></script>
+    <script>
+        window.process = {
+            env: {
+                NODE_ENV: 'production'
+            }
+        };
+    </script>
     <style>
         body {
             margin: 0;
         }
     </style>
 </head>
+
 <body>
     <web-app></web-app>
 </body>
+
 </html>
