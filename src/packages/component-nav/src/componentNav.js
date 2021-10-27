@@ -1,8 +1,8 @@
 import { LitElement, html, css } from "lit-element";
-
+import '../../component-search/component-search';
 export class ComponentNav extends LitElement {
     static get styles() {
-        return css`
+        return css `
           :host {
             display: block;
           }
@@ -30,6 +30,9 @@ export class ComponentNav extends LitElement {
            <ul class="container-nav">
                <li>
                    ${this.emailUser}
+               </li>
+               <li>
+                   <component-search></component-search>
                </li>
                <li>
                    <button>logout</button>

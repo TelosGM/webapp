@@ -1,41 +1,49 @@
 import { LitElement, html, css } from "lit-element";
 
-
-
-const apiKey = 'dc6zaTOxFJmzC';
-const busqueda = 'dogs';
-const limit = '3';
-
-
-
 export class ComponentCard extends LitElement {
-    async getGifs(){ 
-        fetch(`https://api.giphy.com/v1/gifs/search?q=${busqueda}&limit=${limit}&api_key=${apiKey}`)
-        .then(response=>response.json())
-        .then(json => {
-            var gif=  [ ...gif, [json.data[0].title,  json.data[0].images.fixed_height.url ]];
-            debugger
-            return gif;
-            }
-        )
-        .catch(error=> console.log(error))
+    static get properties() {
+        return {
+            title: { type: String },
+            description: { type: String },
+            image: { type: String }
+        }
     }
 
-    render() {
+
+    static get styles() {
+        return css `
         
-        var gifArr=this.getGifs();
-        debugger
-        return html`
-            <section>
+            :host {
+                display: block;
+            }
+
+            .container-card {
+                border: 1px solid black;
+            }
+
+            .container-card header {
+                background-color:  #581845;
+            }
+
+            .container-card main {
+                background-color: #99A3A4;
+            }
+        `;
+    }
+
+
+    render() {
+        return html `
+            <section class="container-card">
                 
                 <header>
-                    <h1>title</h1>
+                    <h1>${this.title}</h1>
                 </header>
                 <main>
-                    imagen
+                    <img src="${this.image}">
                 </main>
                 <footer>
-                    description
+                    ${this.description}
                 </footer>
             </section>
         `;
