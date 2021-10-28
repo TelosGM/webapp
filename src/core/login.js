@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut ,getAuth } from 'firebase/auth';
 
 
 const INITIAL_CONFIG_FIREBASE = {
@@ -18,15 +18,24 @@ class Login {
     }
 
 
-
+    async logOut(){
+        try{
+            debugger
+            await signOut(this.auth);
+        }catch (err){
+            return err;
+        }
+    }
 
     async registerUser({ email, password }){
         try {
             
             return await createUserWithEmailAndPassword(getAuth(), email, password);
+
         } catch (err) {
             
             switch(err.code){
+
                 case "auth/email-already-in-use":
                     try{
                         return await signInWithEmailAndPassword(getAuth(), email, password);
@@ -39,42 +48,9 @@ class Login {
             }
             
         }
-
-
-        /*
-        createUserWithEmailAndPassword(getAuth(), email,pass)
-            .then((userCredential)=>{
-                //exito de logueo
-                const user = userCredential.user;
-
-                Javier Gandara8:20 PM
-            })
-            .catch((error)=>{
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            })
-
-         */
     }
 
 
-    /*
-    inicioSesion(email,pass){
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, pass)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = e
-                const errorMessage = error.message;
-            });
-    }
-
-     */
 }
 
 export default new Login();

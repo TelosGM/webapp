@@ -25,6 +25,15 @@ export class ComponentNav extends LitElement {
         }
     }
 
+    handleLogoutEvent(event) {
+        debugger
+        event.preventDefault();
+        this.dispatchEvent(new CustomEvent('on-logout', {
+            bubbles: true,
+            composed: true
+        }));
+    }
+
     render() {
         return html `
            <ul class="container-nav">
@@ -35,7 +44,7 @@ export class ComponentNav extends LitElement {
                    <component-search></component-search>
                </li>
                <li>
-                   <button>logout</button>
+                   <button @click="${this.handleLogoutEvent}">logout</button>
                </li>
            </ul>
         `;
