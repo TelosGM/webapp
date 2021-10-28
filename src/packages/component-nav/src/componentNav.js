@@ -26,7 +26,6 @@ export class ComponentNav extends LitElement {
     }
 
     handleLogoutEvent(event) {
-        debugger
         event.preventDefault();
         this.dispatchEvent(new CustomEvent('on-logout', {
             bubbles: true,
