@@ -21,8 +21,11 @@ class Login {
     async logOut(){
         try{
             debugger
-            await signOut(this.auth);
+            
+            return await signOut(auth);
+            
         }catch (err){
+            debugger
             return err;
         }
     }

@@ -1,10 +1,12 @@
 import { LitElement, css, html } from "lit-element";
 import '../../../packages/component-nav/component-nav';
 import '../../../packages/component-card/component-card';
+import Login from '../../../core/login';
+import { RouterProvider } from '../../../core/router';
 const apiKey = 'dc6zaTOxFJmzC';
 const limit = '10';
 
-export class PageHome extends LitElement {
+export class PageHome extends RouterProvider(LitElement) {
 
     static get properties() {
         return {
@@ -34,13 +36,24 @@ export class PageHome extends LitElement {
         super.connectedCallback();
         this.cardsGif = [...await this.getGifs()];
         this.addEventListener('on-search', this.handleSearch);
+        this.addEventListener('on-logout', this.handleLogout);
     }
 
 
     disconnectedCallback() {
         super.disconnectedCallback();
         this.removeEventListener('on-search', this.handleSearch);
+        this.removeEventListener('on-logout', this.handleLogout);
     }
+
+    async handleLogout(event) {
+        debugger
+        const { user } = await Login.logOut();
+        debugger
+        sessionStorage.removeItem('emailUserLogin');
+        this.navigator('/');
+    }
+
 
     async handleSearch(event) {
         this.cardsGif = [...this.cardsGif, ...await this.getGifs(event.detail)];

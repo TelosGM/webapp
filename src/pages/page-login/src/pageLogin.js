@@ -10,7 +10,7 @@ export class PageLogin extends connect(store)(RouterProvider(LitElement)) {
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener('on-submit-form', this.handleLogin);
-        this.addEventListener('on-logout', this.handleLogout);
+        
     }
 
     async handleLogin(event) {
@@ -19,14 +19,7 @@ export class PageLogin extends connect(store)(RouterProvider(LitElement)) {
         this.navigator('/home');
     }
     
-    async handleLogout(event) {
-        debugger
-        const { user } = await Login.logOut();
-        debugger
-        sessionStorage.removeItem('emailUserLogin');
-        this.navigator('/');
-    }
-
+    
     render() {
         return html `
             <component-form></component-form>
@@ -41,6 +34,6 @@ export class PageLogin extends connect(store)(RouterProvider(LitElement)) {
     disconnectedCallback() {
         super.disconnectedCallback();
         this.removeEventListener('on-submit-form', this.handleLogin);
-        this.removeEventListener('on-logout', this.handleLogout);
+        
     }
 }
