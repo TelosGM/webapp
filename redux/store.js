@@ -17,4 +17,4 @@ const dispatchRedux = (state = INITIALSTATE, actions) => {
     }
 }
 
-export const store = createStore(dispatchRedux, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export const store = createStore(dispatchRedux);

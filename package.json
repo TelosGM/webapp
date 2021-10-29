@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start-dev": "web-dev-server"
+        "start-dev": "web-dev-server",
+        "build": "rollup -c rollup.config.js"
     },
     "repository": {
         "type": "git",
@@ -26,6 +27,7 @@
         "redux": "^4.1.1"
     },
     "devDependencies": {
-        "@web/dev-server": "^0.1.25"
+        "@web/dev-server": "^0.1.25",
+        "rollup": "^2.58.3"
     }
 }
