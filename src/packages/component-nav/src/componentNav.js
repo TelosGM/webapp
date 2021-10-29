@@ -1,28 +1,21 @@
 import { LitElement, html, css } from "lit-element";
+import { styleNav } from './componentNav.style.js';
 import '../../component-search/component-search';
 export class ComponentNav extends LitElement {
     static get styles() {
-        return css `
-          :host {
-            display: block;
-          }
-          
-          .container-nav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            background: darkgray;
-            height: 60px;
-            display: flex;
-            align-items: center;
-          }
-        `;
+        return styleNav;
     }
 
     static get properties() {
         return {
-            emailUser: { type: String }
+            emailUser: { type: String },
+            isSticky: { type: Boolean, attribute: 'sticky', reflect: true },
         }
+    }
+
+    constructor() {
+        super();
+        this.isSticky = false;
     }
 
     handleLogoutEvent(event) {
@@ -36,7 +29,7 @@ export class ComponentNav extends LitElement {
     render() {
         return html `
            <ul class="container-nav">
-               <li>
+               <li class="${this.isSticky ? 'sticky-item' : ''}">
                    ${this.emailUser}
                </li>
                <li>
@@ -44,6 +37,12 @@ export class ComponentNav extends LitElement {
                </li>
                <li>
                    <button @click="${this.handleLogoutEvent}">logout</button>
+               </li>
+               <li>
+                <slot name="slot1"></slot>
+               </li>
+               <li>
+                <slot name="slot2"></slot>
                </li>
            </ul>
         `;
