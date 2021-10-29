@@ -20,12 +20,12 @@ class Login {
 
     async logOut(){
         try{
-            debugger
+            
             
             return await signOut(auth);
             
         }catch (err){
-            debugger
+            
             return err;
         }
     }

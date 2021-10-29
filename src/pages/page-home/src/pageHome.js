@@ -32,6 +32,7 @@ export class PageHome extends RouterProvider(LitElement) {
         super();
         this.cardsGif = [];
         this.searchNo=0;
+        this.searchType='dog';
     }
 
 
@@ -41,8 +42,8 @@ export class PageHome extends RouterProvider(LitElement) {
         this.cardsGif = [...await this.getGifs()];
         this.addEventListener('on-search', this.handleSearch);
         this.addEventListener('on-logout', this.handleLogout);
-        var target = document.querySelector('#grid-cards');
-        debugger
+        var target = this.shadowRoot.querySelector('#grid-cards');
+
         
     }
     
@@ -67,12 +68,13 @@ export class PageHome extends RouterProvider(LitElement) {
 
 
     async handleSearch(event) {
-        this.cardsGif = [...this.cardsGif, ...await this.getGifs(event.detail)];
+        this.searchType=event.detail;
+        this.cardsGif = [ ...await this.getGifs(this.searchType)];
         this.searchNo=0;
     }
 
-    async handleObserverMore(event) {
-        this.cardsGif = [...this.cardsGif, ...await this.getGifs(event.detail,  this.searchNo*limit)];
+    async handleMore(event) {
+        this.cardsGif = [...this.cardsGif, ...await this.getGifs(this.searchType,  this.searchNo* limit )];
         this.searchNo++;
         debugger
     }
@@ -84,14 +86,32 @@ export class PageHome extends RouterProvider(LitElement) {
         return data;
     }
 
+    scrollTopAndChangeBar(event) {
+        window.scrollTo(0,0);
+        let bar = event.currentTarget.parentElement.previousElementSibling.previousElementSibling.shadowRoot.querySelector('ul');
+        bar.style.backgroundColor="#ffd7ba"
+
+
+    }
+
+
     render() {
             return html `
             <component-nav .emailUser="${sessionStorage.getItem('emailUserLogin')}"></component-nav>
+            
             <section class="grid-cards">
                 ${this.cardsGif.map((cardGif) => html `
                     <component-card image="${cardGif.images.fixed_height.url}" description="${cardGif.source}" title="${cardGif.title}  "></component-card>
                 `)}
             </section>
+            <section>
+                <button @click=${this.handleMore}>NEXT</button>
+            <button @click="${this.scrollTopAndChangeBar}">Vovler Arriba</button>
+            </section>
         `;
     }
 }
+
+
+// boton de subir todo
+// al subir cambiar  color de barra 
