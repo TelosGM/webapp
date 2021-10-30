@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "web-test-runner src/packages/**/test/*.test.js --node-resolve --watch",
         "start-dev": "web-dev-server",
         "build": "rollup -c rollup.config.js"
     },
@@ -27,7 +27,10 @@
         "redux": "^4.1.1"
     },
     "devDependencies": {
+        "@esm-bundle/chai": "^4.3.4-fix.0",
+        "@open-wc/testing": "^3.0.0-next.5",
         "@web/dev-server": "^0.1.25",
+        "@web/test-runner": "^0.13.20",
         "rollup": "^2.58.3"
     }
 }
