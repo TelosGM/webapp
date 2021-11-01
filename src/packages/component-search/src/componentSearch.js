@@ -14,7 +14,7 @@ export class ComponentSearch extends LitElement {
     render() {
         return html `
             <section>
-                <form @submit="${this.handleSubmitSearch}">
+                <form @submit="${this.handleSubmitSearch} ">
                     <input type="text"/>
                     <button type="submit">Buscar</button>
                 </form>

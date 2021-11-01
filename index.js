@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit-element";
 import { RouterMixin } from "./src/core/router";
 import './src/pages/page-login/page-login';
 import './src/pages/page-home/page-home';
+import { storybookPlugin } from '@web/dev-server-storybook';
 
 class WebApp extends  RouterMixin(LitElement) {
     static get properties() {
@@ -35,5 +36,9 @@ class WebApp extends  RouterMixin(LitElement) {
         `;
     }
 }
-
+export default {
+    // type can be 'web-components' or 'preact'
+    plugins: [storybookPlugin({ type: 'web-components' })],
+  };
+  
 window.customElements.define('web-app', WebApp);
