@@ -6,7 +6,10 @@
     "scripts": {
         "test": "web-test-runner src/packages/**/test/*.test.js --node-resolve --watch",
         "start-dev": "web-dev-server",
-        "build": "rollup -c rollup.config.js"
+        "build": "rollup -c rollup.config.js",
+        "build:storybook": "build-storybook",
+        "build:storybook:server": "es-dev-server --root-dir storybook-static --open",
+        "storybook": "wds -c web-dev-storybook.config.mjs"
     },
     "repository": {
         "type": "git",
@@ -29,9 +32,9 @@
     "devDependencies": {
         "@esm-bundle/chai": "^4.3.4-fix.0",
         "@open-wc/testing": "^3.0.0-next.5",
-        "@storybook/cli": "^6.3.12",
         "@web/dev-server": "^0.1.25",
         "@web/dev-server-storybook": "^0.3.8",
+        "@web/storybook-prebuilt": "^0.1.26",
         "@web/test-runner": "^0.13.20",
         "rollup": "^2.58.3"
     }

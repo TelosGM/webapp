@@ -1,3 +1,4 @@
 module.exports = {
-    stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
-  };
+    stories: ['../src/packages/component-nav/stories/componentNav.stories.js'],
+    addons: ['@web/storybook-prebuilt/manager.js']
+};
